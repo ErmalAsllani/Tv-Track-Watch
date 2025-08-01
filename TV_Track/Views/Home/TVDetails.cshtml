@@ -1,0 +1,218 @@
+﻿@model TV_Track.Models.TvSeries
+
+@{
+    ViewBag.homeClass = false;
+    bool notReleasedYet = false;
+
+    if (DateTime.Now < Model.StartYear)
+    {
+        notReleasedYet = true;
+    }
+}
+<!-- details -->
+<section class="section section--details">
+    <!-- details content -->
+    <div class="container">
+        <div class="row">
+            <!-- title -->
+            <div class="col-12">
+                <div class="filter__content">
+                    <!-- filter item -->
+                    <div class="filter__item" id="filter__genre">
+                        <div class="filter__items">
+                            <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-genre" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <input type="button" value="List 1">
+                                <span></span>
+                            </div>
+
+                            <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-genre">
+                                <li>List 1</li>
+                                <li>List 2</li>
+                                <li>List 3</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <button class="filter__btn my-btn-space-around" type="button">Add To MyList</button>
+                    <!-- filter btn -->
+                    <button class="filter__btn my-btn-space-around" type="button">Add To WatchList</button>
+                    <!-- end filter btn -->
+                    <!-- filter btn -->
+                    @if (notReleasedYet)
+                    {
+                        <button class="filter__btn my-btn-space-around" type="button">Notify On Release</button>
+                    }
+
+                    <!-- end filter btn -->
+                    <style>
+                        .filter__content {
+                            justify-content: flex-start !important;
+                        }
+
+                        .my-btn-space-around {
+                            font-size: 12px;
+                            margin: 12px;
+                        }
+                    </style>
+
+                </div>
+            </div>
+            <!-- end title -->
+            <!-- content -->
+            <div class="col-12 col-xl-12">
+                <div class="card card--details">
+                    <div class="row">
+                        <!-- card cover -->
+                        <div class="col-12 col-sm-5 col-md-4 col-lg-3 ">
+                            <div class="card__cover">
+                                <img src="@Model.TvSeriesPoster" alt="">
+                                <span class="card__rate card__rate--green">@Model.VoteAverage</span>
+                            </div>
+                        </div>
+                        <!-- end card cover -->
+                        <!-- card content -->
+                        <div class="col-12 col-md-8 col-lg-9 col-xl-7">
+                            <div class="card__content">
+                                <h1 class="section__title section__title--mb">@Model.Title</h1>
+                                <ul class="card__meta">
+                                    <li><span>Creator:</span>@Model.Creator</li>
+                                    <li>
+                                        <span>Cast:</span>
+                                        @foreach (var cast in Model.Casts)
+                                        {
+                                            <a href="#">@(cast.Actor.FirstName + " " + cast.Actor.LastName)</a>
+                                        }
+                                    </li>
+
+                                    <li>
+                                        <span>Genre:</span>
+                                        @foreach (var genre in Model.TvGenres)
+                                        {
+                                            <a href="#">@genre.Genre.GenreName</a>
+                                        }
+
+                                    </li>
+                                    <li><span>Release year:</span> @(Model.StartYear.Year + " - " + (Model.EndYear.HasValue ? Model.EndYear.Value.Year.ToString() : ""))</li>
+                                    <li><span>Running time:</span> @Model.RunningTime min</li>
+                                    <li><span>Country:</span> <a href="#">@Model.CountryName</a></li>
+                                </ul>
+                                <div class="card__description">
+                                    @Model.Description
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card content -->
+                    </div>
+                </div>
+            </div>
+            <!-- end content -->
+
+        </div>
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-12 dashbox">
+                <div>
+                    <div class="dashbox__title">
+                        <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-seasons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <input type="button" value="Season 1">                        
+                            <span></span>
+                        </div>
+
+                        <ul class="filter__season-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-genre">        
+                            @for (int i = 1; i <= Model.NumberOfSeasons; i++)
+                            {
+                                <li value="@i">Season @i</li>
+                            }
+                        </ul>
+                        <h3 id="seasonTitle"><i class="icon ion-ios-film"></i> Season 1</h3>
+                    </div>
+                    <div class="main__table-wrap" style="margin-top: 20px;">
+                        <table class="main__table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>TITLE</th>
+                                    <th>DESCRIPTION</th>
+                                    <th>RELEASE DATE</th>
+                                    <th>WATCHED?</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="episodes">
+                                @foreach (var episode in Model.TvSeriesSeasons.First().TvSeriesEpisodes)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="main__table-text">@episode.EpisodeNumber</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">@episode.Title</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">
+                                                @episode.Description                       
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">@episode.AirDate.ToShortDateString()</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-btns" style="text-align: center;">
+                                                <a href="#" class="main__table-btn main__table-btn--view">
+                                                    <i class="icon ion-ios-eye"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end details content -->
+</section>
+<!-- end details -->
+
+<script>
+
+    window.addEventListener('load',() => {
+        /*
+         This changes the text of the dropdown menu and the season title and makes an ajax call to get
+         all the episodes of selected season
+         */
+        $('.filter__season-menu li').each(function () {
+            $(this).attr('data-value', $(this).text().toLowerCase());
+        });
+
+        $('.filter__season-menu li').on('click', function () {
+            var text = $(this).text();
+            var itemId = $(this).attr('value');
+
+            $('#filter-seasons').find('input').val(text);
+
+            $('#seasonTitle').empty();
+            $('#seasonTitle').append('<i class="icon ion-ios-film"></i>' + text)
+
+            $.ajax({
+                url: '/Home/GetSeasonByIdJson/?tvId=@Model.TvSeriesId&seasonNumber=' + itemId,
+                method: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    $('#episodes').empty();
+
+                    $(data.tvSeriesEpisodes).each(function (index, episode) {
+                        var airDateShort = episode.airDate.substr(0, 10).replace('-', '/').replace('-', '/')
+                        $('#episodes').append("<tr><td><div class='main__table-text'>" + episode.episodeNumber + "</div></td><td><div class='main__table-text'>" + episode.title + "</div></td><td><div class='main__table-text'>" + episode.description + "</div></td><td><div class='main__table-text'>" + airDateShort +
+                            "</div></td><td><div class='main__table-btns' style='text-align: center;'><a href='#' class='main__table-btn main__table-btn--view'><i class='icon ion-ios-eye'></i></a></div>");      
+                    })
+                }
+            })
+        });
+
+    });
+
+
+</script>

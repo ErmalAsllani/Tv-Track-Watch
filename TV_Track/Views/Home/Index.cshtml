@@ -1,0 +1,260 @@
+﻿@model TV_Track.ViewModels.HomeViewModel
+
+
+<section style="padding-bottom: 70px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="home__title"><b>Continue</b> Watching</h1>
+
+                <button class="home__nav home__nav--prev" type="button">
+                    <i class="icon ion-ios-arrow-round-back"></i>
+                </button>
+                <button class="home__nav home__nav--next" type="button">
+                    <i class="icon ion-ios-arrow-round-forward"></i>
+                </button>
+            </div>
+
+            <div class="col-12">
+                <div class="owl-carousel home__carousel home__carousel--bg">
+                    <div class="card card--big">
+                        <div class="card__cover">
+                            <img src="~/hotfix/img/covers/cover.jpg" alt="">
+                            <a href="details.html" class="card__play">
+                                <i class="icon ion-ios-play"></i>
+                            </a>
+                            <span class="card__rate card__rate--green">8.4</span>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title"><a href="details.html">Mr.Robot</a></h3>
+                            <span class="card__category">
+                                <a href="#">Season 1</a>
+                                <a href="#">Episode 2</a>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="card card--big">
+                        <div class="card__cover">
+                            <img src="~/hotfix/img/covers/cover2.jpg" alt="">
+                            <a href="details.html" class="card__play">
+                                <i class="icon ion-ios-play"></i>
+                            </a>
+                            <span class="card__rate card__rate--green">7.1</span>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title"><a href="details.html">Narcos</a></h3>
+                            <span class="card__category">
+                                <a href="#">Season 1</a>
+                                <a href="#">Episode 2</a>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="card card--big">
+                        <div class="card__cover">
+                            <img src="~/hotfix/img/covers/cover3.jpg" alt="">
+                            <a href="details.html" class="card__play">
+                                <i class="icon ion-ios-play"></i>
+                            </a>
+                            <span class="card__rate card__rate--green">7.9</span>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title"><a href="details.html">Game Of Thrones</a></h3>
+                            <span class="card__category">
+                                <a href="#">Season 1</a>
+                                <a href="#">Episode 2</a>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="card card--big">
+                        <div class="card__cover">
+                            <img src="~/hotfix/img/covers/cover4.jpg" alt="">
+                            <a href="details.html" class="card__play">
+                                <i class="icon ion-ios-play"></i>
+                            </a>
+                            <span class="card__rate card__rate--yellow">6.8</span>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title"><a href="details.html">Friends</a></h3>
+                            <span class="card__category">
+                                <a href="#">Season 1</a>
+                                <a href="#">Episode 2</a>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="card card--big">
+                        <div class="card__cover">
+                            <img src="~/hotfix/img/covers/cover5.jpg" alt="">
+                            <a href="details.html" class="card__play">
+                                <i class="icon ion-ios-play"></i>
+                            </a>
+                            <span class="card__rate card__rate--yellow">6.2</span>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title"><a href="details.html">Dark</a></h3>
+                            <span class="card__category">
+                                <a href="#">Season 1</a>
+                                <a href="#">Episode 2</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- New Releases section -->
+<section class="section section--border">
+    <div class="container">
+        <div class="row">
+            <!-- section title -->
+            <div class="col-12">
+                <div class="section__title-wrap">
+                    <h2 class="section__title">New Releases</h2>
+
+                    <div class="section__nav-wrap">
+                        <button class="section__nav section__nav--prev" type="button" data-nav="#carousel1">
+                            <i class="icon ion-ios-arrow-back"></i>
+                        </button>
+
+                        <button class="section__nav section__nav--next" type="button" data-nav="#carousel1">
+                            <i class="icon ion-ios-arrow-forward"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- end section title -->
+            <!-- carousel -->
+            <div class="col-12">
+                <div class="owl-carousel section__carousel" id="carousel1">
+                    @foreach (var item in Model.UpcomingMovies)
+                    {
+                        <div class="card">
+                            <div class="card__cover">
+                                <img src="@item.MoviePoster" alt="">
+                                <a asp-controller="Home" asp-action="GetMedia" asp-route-id="@item.MovieId" asp-route-mediaType="movie" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                                <span class="card__rate card__rate--green">@item.VoteAverage</span>
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><a href="details.html">@item.Title</a></h3>
+                                <span class="card__category">
+                                    <a href="#">Action</a>
+                                    <a href="#">Triler</a>
+                                </span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- carousel -->
+        </div>
+    </div>
+</section>
+<!-- end section -->
+<!-- Trending Movies section -->
+<section class="section section--border">
+    <div class="container">
+        <div class="row">
+            <!-- section title -->
+            <div class="col-12">
+                <div class="section__title-wrap">
+                    <h2 class="section__title">Trending Movies</h2>
+
+                    <div class="section__nav-wrap">
+                        <button class="section__nav section__nav--prev" type="button" data-nav="#carousel2">
+                            <i class="icon ion-ios-arrow-back"></i>
+                        </button>
+
+                        <button class="section__nav section__nav--next" type="button" data-nav="#carousel2">
+                            <i class="icon ion-ios-arrow-forward"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- end section title -->
+            <!-- carousel -->
+            <div class="col-12">
+                <div class="owl-carousel section__carousel" id="carousel2">
+                    @foreach (var movie in Model.TrendingMovies)
+                    {
+                        <div class="card">
+                            <div class="card__cover">
+                                <img src="@movie.MoviePoster" alt="">
+                                <a asp-controller="Home" asp-action="GetMedia" asp-route-id="@movie.MovieId" asp-route-mediaType="movie" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                                <span class="card__rate card__rate--green">@movie.VoteAverage</span>
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><a href="details.html">@movie.Title</a></h3>
+                                <span class="card__category">
+                                    <a href="#">Action</a>
+                                    <a href="#">Triler</a>
+                                </span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- carousel -->
+        </div>
+    </div>
+</section>
+<!-- end section -->
+<!-- Trending Tv Shows section -->
+<section class="section section--border">
+    <div class="container">
+        <div class="row">
+            <!-- section title -->
+            <div class="col-12">
+                <div class="section__title-wrap">
+                    <h2 class="section__title">Trending Tv Shows</h2>
+
+                    <div class="section__nav-wrap">
+ 
+                        <button class="section__nav section__nav--prev" type="button" data-nav="#carousel3">
+                            <i class="icon ion-ios-arrow-back"></i>
+                        </button>
+
+                        <button class="section__nav section__nav--next" type="button" data-nav="#carousel3">
+                            <i class="icon ion-ios-arrow-forward"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- end section title -->
+            <!-- carousel -->
+            <div class="col-12">
+                <div class="owl-carousel section__carousel" id="carousel3">
+                    @foreach (var tvSeries in Model.TrendingTvSeries)
+                    {
+                        <div class="card">
+                            <div class="card__cover">
+                                <img src="@tvSeries.TvSeriesPoster" alt="">
+                                <a asp-controller="Home" asp-action="GetMedia" asp-route-id="@tvSeries.TvSeriesId" asp-route-mediaType="tv" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                                <span class="card__rate card__rate--green">@tvSeries.VoteAverage</span>
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><a href="details.html">@tvSeries.Title</a></h3>
+                                <span class="card__category">
+                                    <a href="#">Action</a>
+                                    <a href="#">Triler</a>
+                                </span>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <!-- carousel -->
+        </div>
+    </div>
+</section>
+<!-- end section -->

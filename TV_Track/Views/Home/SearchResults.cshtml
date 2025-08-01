@@ -1,0 +1,91 @@
+﻿@model TV_Track.ViewModels.GeneralViewModel
+
+@{
+    string searchUrl = "/Home/SearchResults?searchTerm=" + Model.SearchTerm.Replace(" ", "+") + "&pagenumber=";
+
+}
+
+<!-- catalog -->
+<div class="catalog">
+    <div class="container">
+        <h1 class="section__title">Search results for: <b>@Model.SearchTerm</b></h1>
+        <br>
+        <br>
+        <div class="row row--grid">
+            <!-- card -->
+            @foreach (var result in Model.Media)
+            {
+                <div class="col-6 col-sm-4 col-md-3 col-xl-3">
+                    <div class="card2">
+                        <div class="card__cover">
+                            <img src="@result.Poster" alt="">
+                            <a asp-controller="Home" asp-action="GetMedia" asp-route-id="@result.ID" asp-route-mediaType="@result.MediaType" class="card__play">
+                                <i class="icon ion-ios-play"></i>
+                            </a>
+                            <span class="card__rate card__rate--green">@result.VoteAverage</span>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title"><a href="details.html">@result.Title</a></h3>
+                            <span class="card__category">
+                                <a href="#">Action</a>
+                                <a href="#">Triler</a>
+                            </span>
+                            <span class="card__category">
+                                <a href="#">@result.MediaType</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- end card -->
+        </div>
+        <span class="card__category" style="margin-top: 3%">
+            <a href="#">@Model.TotalResults Total Results</a>
+        </span>
+    </div>
+    <div class="row">
+
+        @if (Model.TotalPages > 1)
+        {
+            // This isnt a good fix so think of a better one
+            <!-- paginator -->
+            <div class="col-12">
+                <ul class="paginator">
+                    <li class="paginator__item paginator__item--prev">
+                        <a href="#"><i class="icon ion-ios-arrow-back"></i></a>
+                    </li>
+
+                    @if (Model.PageNumber < 6)
+                    {
+
+                        @for (int i = 1; i <= (Model.TotalPages <= 6 ? Model.TotalPages : 6); i++)
+                        {
+                            <li class="paginator__item @(i == Model.PageNumber ? "paginator__item--active" : "")"><a href="@(searchUrl + i)">@i</a></li>
+
+                        }
+                    }
+                    else
+                    {
+                        <li class="paginator__item"><a href="@(searchUrl + (Model.PageNumber - 2))">@(Model.PageNumber - 2)</a></li>
+                        <li class="paginator__item"><a href="@(searchUrl + (Model.PageNumber - 1))">@(Model.PageNumber - 1)</a></li>
+                        <li class="paginator__item"><a href="@(searchUrl + Model.PageNumber)">@Model.PageNumber</a></li>
+                        <li class="paginator__item"><a href="@(searchUrl + (Model.PageNumber + 1))">@(Model.PageNumber + 1)</a></li>
+                        <li class="paginator__item"><a href="@(searchUrl + (Model.PageNumber + 2))">@(Model.PageNumber + 2)</a></li>
+
+                    }
+
+
+                    <li class="paginator__item paginator__item--next">
+                        <a href="#"><i class="icon ion-ios-arrow-forward"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- end paginator -->
+        }
+
+        
+    </div>
+    <!-- end catalog -->
+</div>
+

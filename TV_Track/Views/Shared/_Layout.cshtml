@@ -1,0 +1,200 @@
+﻿@{ 
+    var username = Context.User.Identity.Name;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/hotfix/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="~/hotfix/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="~/hotfix/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/hotfix/css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="~/hotfix/css/nouislider.min.css">
+    <link rel="stylesheet" href="~/hotfix/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/hotfix/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/hotfix/css/plyr.css">
+    <link rel="stylesheet" href="~/hotfix/css/photoswipe.css">
+    <link rel="stylesheet" href="~/hotfix/css/default-skin.css">
+    <link rel="stylesheet" href="~/hotfix/css/main.css">
+    <link rel="stylesheet" href="~/hotfix/css/admin.css">
+
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="icon/favicon-32x32.png">
+
+    <title>Home</title>
+</head>
+<body class="body">
+    <!-- Nav Bar -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="header__content">
+                        <!-- header logo -->
+                        <a asp-controller="Home" asp-action="Index" class="header__logo">
+                            @*<img src="~/hotfix/img/logo.svg" alt="">*@
+                            <img src="~/img/test.svg" alt="">
+                        </a>
+                        <!-- end header logo -->
+                        <!-- header nav -->
+                        <ul class="header__nav">
+                            <!-- dropdown -->
+                            <li class="header__nav-item">
+                                <a class="dropdown-toggle header__nav-link" asp-controller="Home" asp-action="Index">HOME</a>
+                            </li>
+                            <li class="header__nav-item">
+                                <a class="dropdown-toggle header__nav-link" asp-controller="Home" asp-action="Movies">MOVIES</a>
+                            </li>
+                            <!-- end dropdown -->
+                            <!-- dropdown -->
+                            <li class="header__nav-item">
+                                <a class="dropdown-toggle header__nav-link" asp-controller="Home" asp-action="TvShows">TV SHOWS</a>
+                            </li>
+                        </ul>
+                        <!-- end header nav -->
+                        <!-- header auth -->
+                        <div class="header__auth">
+                            <form class="header__search" asp-controller="Home" asp-action="SearchResults" method="get">
+                                <input class="header__search-input" type="text" placeholder="Search..." name="searchTerm">
+                                <button class="header__search-button" type="button">
+                                    <i class="icon ion-ios-search"></i>
+                                </button>
+                                <button class="header__search-close" type="button">
+                                    <i class="icon ion-md-close"></i>
+                                </button>
+                            </form>
+
+                            <button class="header__search-btn" type="button">
+                                <i class="icon ion-ios-search"></i>
+                            </button>
+
+                            <!-- dropdown -->
+                            <div class="dropdown header__lang">
+                                <a class="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">EN <i class="icon ion-ios-arrow-down"></i></a>
+
+                                <ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuLang">
+                                    <li><a href="#">English</a></li>
+                                    <li><a href="#">Spanish</a></li>
+                                    <li><a href="#">Russian</a></li>
+                                </ul>
+                            </div>
+                            <!-- end dropdown -->
+
+                            <a href="#" class="header__sign-in" style="width: 90px;">
+                                <i class="icon ion-ios-log-out"></i>
+                            </a>
+                        </div>
+                        <!-- end header auth -->
+                        <!-- header menu btn -->
+                        <button class="header__btn" type="button">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <!-- end header menu btn -->
+                        <!-- sidebar -->
+                        <div class="sidebar">
+                            <!-- sidebar logo -->
+                            <a href="index.html" class="sidebar__logo">
+                                <img src="~/img/test.svg" alt="">
+                            </a>
+                            <!-- end sidebar logo -->
+                            <!-- sidebar user -->
+                            <div class="sidebar__user">
+                                <div class="sidebar__user-img">
+                                    <img src="~/hotfix/img/user.svg" alt="">
+                                </div>
+
+                                <div class="sidebar__user-title">
+                                    <span>Admin</span>
+                                    <p>@username</p>
+                                </div>
+
+                                <a href="@Url.Action("Logout", "Account")" class="sidebar__user-btn">
+                                    <i class="icon ion-ios-log-out"></i>
+                                </a>
+                            </div>
+                            <!-- end sidebar user -->
+                            <!-- sidebar nav -->
+                            <div class="sidebar__nav-wrap">
+                                <ul class="sidebar__nav">
+                                    <li class="sidebar__nav-item">
+                                        <a href="index.html" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-keypad"></i> <span>PROFILE</span></a>
+                                    </li>
+
+                                    <li class="sidebar__nav-item">
+                                        <a href="catalog.html" class="sidebar__nav-link"><i class="icon ion-ios-film"></i> <span>UPCOMING</span></a>
+                                    </li>
+
+                                    <li class="sidebar__nav-item">
+                                        <a href="users.html" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> <span>WATCHLIST</span></a>
+                                    </li>
+
+                                    <li class="sidebar__nav-item">
+                                        <a href="comments.html" class="sidebar__nav-link"><i class="icon ion-ios-chatbubbles"></i> <span>MY LISTS</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end sidebar nav -->
+                        </div>
+                        <!-- end sidebar -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <section class="@(ViewBag.homeClass == false ? "" : "home")">
+        @RenderBody()
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer__content">
+                        <a href="index.html" class="footer__logo">
+                            <img src="~/img/test.svg" alt="">
+                        </a>
+
+                        <span class="footer__copyright">© TV Track, 2021—@DateTime.Now.Year</span>
+
+                        <nav class="footer__nav">
+                            <a href="about.html">About Us</a>
+                            <a href="privacy.html">Privacy policy</a>
+                        </nav>
+
+                        <button class="footer__back" type="button">
+                            <i class="icon ion-ios-arrow-round-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/hotfix/js/jquery-3.5.1.min.js"></script>
+    <script src="~/hotfix/js/bootstrap.bundle.min.js"></script>
+    <script src="~/hotfix/js/owl.carousel.min.js"></script>
+    <script src="~/hotfix/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/hotfix/js/jquery.mousewheel.min.js"></script>
+    <script src="~/hotfix/js/jquery.mCustomScrollbar.min.js"></script>
+    <script src="~/hotfix/js/wNumb.js"></script>
+    <script src="~/hotfix/js/nouislider.min.js"></script>
+    <script src="~/hotfix/js/plyr.min.js"></script>
+    <script src="~/hotfix/js/photoswipe.min.js"></script>
+    <script src="~/hotfix/js/photoswipe-ui-default.min.js"></script>
+    <script src="~/hotfix/js/main.js"></script>
+    <script src="~/hotfix/js/admin.js"></script>
+    @RenderSection("scripts", false);
+</body>
+</html>
